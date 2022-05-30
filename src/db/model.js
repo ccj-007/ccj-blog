@@ -4,7 +4,7 @@ const seq = require('./seq')
 //创建User模型
 const User = seq.define('users', {
   //id会自动创建
-  userName: {
+  username: {
     type: Sequelize.STRING, //VARCHAR(255)
     allowNUll: false
   },

@@ -4,20 +4,23 @@
   "private": true,
   "scripts": {
     "start": "nodemon bin/www",
-    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
+    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon --inspect=9396 bin/www",
     "prd": "cross-env NODE_ENV=prd  pm2 start bin/www",
-    "test": ""
+    "test": "cross-env NODE_ENV=test  jest --runInBand --forceExit --colors"
   },
   "dependencies": {
+    "ajv": "^8.11.0",
     "cross-env": "^7.0.3",
     "debug": "^4.1.1",
-    "ejs": "^3.1.8",
+    "ejs": "^2.3.4",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-convert": "^1.2.0",
+    "koa-generic-session": "^2.3.0",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.0",
     "koa-onerror": "^4.1.0",
+    "koa-redis": "^4.0.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
