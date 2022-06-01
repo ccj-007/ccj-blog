@@ -9,7 +9,6 @@ function getLoginInfo (ctx) {
   let data = {
     isLogin: false // 默认未登录
   }
-  console.log(ctx.session);
   const userInfo = ctx.session.userInfo
   if (userInfo) {
     data = {
@@ -19,7 +18,6 @@ function getLoginInfo (ctx) {
   }
   return data
 }
-
 
 router.get('/login', async (ctx, next) => {
   await ctx.render('login', getLoginInfo(ctx))

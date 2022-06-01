@@ -7,17 +7,19 @@ const doCrypto = require('../utils/cryp')
  * @param {string} userName 
  * @param {string} password 
  */
-const getUserInfo = async (userName, password) => {
+async function getUserInfo (userName, password) {
   const whereOpt = { userName }
   if (password) {
-    whereOpt.password = password
+    Object.assign(whereOpt, { password })
   }
+
   //search
   const result = await User.findOne({
-    attributes: ['id', 'username', 'nickName', 'picture', 'city'],
+    attributes: ['id', 'userName', 'nickName', 'picture', 'city'],
     where: whereOpt
   })
-  if (!result) {
+
+  if (result == null) {
     return result
   }
   //格式化
@@ -35,7 +37,7 @@ const getUserInfo = async (userName, password) => {
 async function createUser ({ userName, password, gender = 3, nickName }) {
   const result = await User.create({
     userName,
-    password: doCrypto(password),
+    password,
     nickName: nickName ? nickName : userName,
     gender
   })
@@ -43,7 +45,22 @@ async function createUser ({ userName, password, gender = 3, nickName }) {
   return data
 }
 
+/**
+ * 删除用户
+ * @param {string} userName 用户名
+ */
+async function deleteUser (userName) {
+  const result = await User.destroy({
+    where: {
+      userName
+    }
+  })
+  //删除的行数
+  return result > 0
+}
+
 module.exports = {
   getUserInfo,
-  createUser
+  createUser,
+  deleteUser
 }
