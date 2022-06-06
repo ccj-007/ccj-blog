@@ -14,6 +14,8 @@ const { isProd } = require('./utils/env')
 const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 
 const userViewRouter = require('./routes/view/user')
+const blogViewRouter = require('./routes/view/blog')
+const blogApiRouter = require('./routes/api/blog')
 const userApiRouter = require('./routes/api/user')
 const utilsApiRouter = require('./routes/api/utils')
 const errorViewRouter = require('./routes/view/error')
@@ -34,6 +36,8 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 app.use(koaStatic(__dirname + '/public'))
+
+//如果不同服务器业务，需要有统一的文件服务器oss来上传文件
 app.use(koaStatic(path.join(__dirname, '../uploadFiles')))
 
 app.use(views(__dirname + '/views', {
@@ -65,6 +69,8 @@ app.use(session({
 
 // routes
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
+app.use(blogApiRouter.routes(), blogApiRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(utilsApiRouter.routes(), utilsApiRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())

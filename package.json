@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "sync": "node src/db/sync.js",
     "start": "nodemon bin/www",
     "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon --inspect=9396 bin/www",
     "prd": "cross-env NODE_ENV=prd  pm2 start bin/www",
@@ -27,7 +28,8 @@
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.19.2"
+    "sequelize": "^6.19.2",
+    "xss": "^1.0.12"
   },
   "devDependencies": {
     "jest": "^24.9.0",
